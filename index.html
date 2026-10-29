@@ -37,41 +37,41 @@ button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .in{font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:8px;width:100%;min-width:0}
 </style></head><body><main id="app"></main><nav id="nav"></nav>
 <script>
-const CT=`kip|Kipfilet|1.6|g|125|0
-gehakt|Gehakt|1.3|g|100|0
-spek|Spekjes|0.6|g|30|0
-ham|Ham|0.5|g|30|0
-zalm|Zalm|2.2|g|120|0
-rijst|Rijst|0.2|g|75|1
-pasta|Pasta|0.25|g|90|1
-orzo|Orzo|0.35|g|80|0
-wrap|Wraps|0.5|st|2|0
+const CT=`kip|Kipfilet|1.25|g|125|0
+gehakt|Gehakt|0.8|g|100|0
+spek|Spekjes|0.45|g|30|0
+ham|Ham|0.45|g|30|0
+zalm|Zalm|2.6|g|120|0
+rijst|Rijst|0.17|g|75|1
+pasta|Pasta|0.16|g|90|1
+orzo|Orzo|0.24|g|80|0
+wrap|Wraps|0.6|st|2|0
 naan|Naanbrood|0.5|st|1|0
-bloemkool|Bloemkool|0.6|g|200|0
-broccoli|Broccoli|0.55|g|150|0
+bloemkool|Bloemkool|0.45|g|200|0
+broccoli|Broccoli|0.45|g|150|0
 spinazie|Spinazie|0.5|g|100|0
-boerenkool|Boerenkool|0.5|g|200|0
-zuurkool|Zuurkool|0.4|g|200|0
-rodekool|Rode kool|0.4|g|200|0
-sperzieb|Sperziebonen|0.6|g|150|0
-courgette|Courgette|0.5|st|0.5|0
+boerenkool|Boerenkool|0.6|g|200|0
+zuurkool|Zuurkool|0.5|g|200|0
+rodekool|Rode kool|0.5|g|200|0
+sperzieb|Sperziebonen|0.85|g|150|0
+courgette|Courgette|0.45|st|0.5|0
 tomaat|Tomaten|0.5|g|120|0
-paprika|Paprika|0.6|st|0.5|0
-mozzarella|Mozzarella|0.55|g|60|0
+paprika|Paprika|0.45|st|0.5|0
+mozzarella|Mozzarella|0.5|g|60|0
 feta|Feta|0.6|g|50|0
-burrata|Burrata|1.2|g|60|0
-kaas|Geraspte kaas|0.4|g|40|0
-boursin|Boursin|0.8|g|40|0
-room|Kookroom|0.3|ml|50|0
-pesto|Pesto|0.5|g|30|0
-currypasta|Currypasta|0.4|g|25|0
-kokos|Kokosmelk|0.45|ml|100|0
-linzen|Linzen|0.4|g|60|0
+burrata|Burrata|1.0|g|60|0
+kaas|Geraspte kaas|0.45|g|40|0
+boursin|Boursin|0.7|g|40|0
+room|Kookroom|0.25|ml|50|0
+pesto|Pesto|0.35|g|30|0
+currypasta|Currypasta|0.45|g|25|0
+kokos|Kokosmelk|0.4|ml|100|0
+linzen|Linzen|0.3|g|60|0
 aardappel|Aardappelen|0.3|g|200|0
-sla|Sla|0.4|g|60|0
-avocado|Avocado|0.8|st|0.5|0
-tzatziki|Tzatziki|0.4|g|50|0
-mais|Mais en bonen|0.4|g|80|0
+sla|Sla|0.45|g|60|0
+avocado|Avocado|0.55|st|0.5|0
+tzatziki|Tzatziki|0.45|g|50|0
+mais|Mais en bonen|0.35|g|80|0
 ei|Eieren|0.3|st|1|1
 ui|Ui|0.1|st|0.5|1
 knoflook|Knoflook|0.05|teen|1|1
@@ -127,31 +127,31 @@ sojasaus|Sojasaus|0.05|ml|10|1
 azijn|Azijn|0.03|ml|10|1
 honing|Honing|0.1|g|10|1
 tomatenpuree|Tomatenpuree|0.1|g|15|1
-asperges|Groene asperges|1.2|g|150|0
+asperges|Groene asperges|1.4|g|150|0
 witlof|Witlof|0.6|g|150|0
 wortel|Wortelen|0.3|g|150|0
-snijbonen|Snijbonen|0.6|g|150|0
-pompoen|Pompoen|0.4|g|200|0
+snijbonen|Snijbonen|0.8|g|150|0
+pompoen|Pompoen|0.5|g|200|0
 aubergine|Aubergine|0.7|st|0.5|0
 gnocchi|Gnocchi|0.5|g|125|0
-ricotta|Ricotta|0.6|g|50|0
-deeg|Bladerdeeg of pizzadeeg|0.4|st|0.5|0
-broodje|Burgerbroodjes|0.3|st|1|0
-kipgehakt|Kipgehakt|1.2|g|100|0
-friet|Friet|0.5|g|150|0
-pita|Pitabroodjes|0.4|st|1|0
-nacho|Nacho's|0.5|g|40|0
+ricotta|Ricotta|0.45|g|50|0
+deeg|Bladerdeeg of pizzadeeg|0.5|st|0.5|0
+broodje|Burgerbroodjes|0.45|st|1|0
+kipgehakt|Kipgehakt|0.9|g|100|0
+friet|Friet|0.4|g|150|0
+pita|Pitabroodjes|0.27|st|1|0
+nacho|Nacho's|0.4|g|40|0
 pindasaus|Pindasaus|0.4|g|40|0
-stoofvlees|Stoofvlees|1.8|g|125|0
-bulgur|Bulgur|0.3|g|70|0
-couscous|Couscous|0.3|g|70|0
-kikkererwten|Kikkererwten|0.35|g|80|0
-carpaccio|Carpaccio|1.5|g|50|0
-pijnboompitten|Pijnboompitten|0.5|g|15|0
-basilicum|Basilicum|0.25|g|10|0
-aardbeien|Aardbeien|0.8|g|80|0
-rucola|Rucola|0.4|g|30|0
-capres|Capres|0.15|g|10|0`;
+stoofvlees|Stoofvlees|1.75|g|125|0
+bulgur|Bulgur|0.2|g|70|0
+couscous|Couscous|0.2|g|70|0
+kikkererwten|Kikkererwten|0.4|g|80|0
+carpaccio|Carpaccio|1.9|g|50|0
+pijnboompitten|Pijnboompitten|0.75|g|15|0
+basilicum|Basilicum|0.35|g|10|0
+aardbeien|Aardbeien|0.55|g|80|0
+rucola|Rucola|0.5|g|30|0
+capres|Capres|0.18|g|10|0`;
 const RT2=`Courgetteschotel|Schotels|45|1|courgette,aardappel,kaas,room,gehakt
 Spinazieschotel|Schotels|45|1|spinazie,aardappel,kaas,room,ei
 Witlof met ham en kaas|Schotels|40|1|witlof,ham,kaas,aardappel,room
@@ -223,7 +223,7 @@ const C={},R=[];
 const BASE=R.length;
 // Voorbeeld-aanbiedingen (later vervangen door de wekelijkse scraper)
 const ST=['AH','Jumbo','Lidl','Aldi','Dirk'];
-const MU={AH:1,Jumbo:.97,Lidl:.88,Aldi:.87,Dirk:.9};
+const MU={AH:1.14,Jumbo:1.09,Lidl:.97,Aldi:.96,Dirk:1};
 let SRC='Dit is voorbeelddata voor de aanbiedingen.',DS={AH:{kip:.25,courgette:.3,pasta:.2,spinazie:.25,mozzarella:.3,gehakt:.15},Jumbo:{gehakt:.3,broccoli:.3,wrap:.25,tomaat:.2,kaas:.2,room:.2,feta:.25},Lidl:{paprika:.3,kip:.15,avocado:.3,sla:.2,mais:.15},Aldi:{spek:.25,aardappel:.2,bloemkool:.3,pesto:.2},Dirk:{kokos:.3,linzen:.25,currypasta:.3,orzo:.2,burrata:.25,ham:.2}};
 let S={n:4,p:2,mode:'single',store:null,menu:[],dis:['zalm'],favs:[],hist:[],moved:[],done:[],tab:'menu'};
 try{const x=JSON.parse(localStorage.getItem('wm1')||'null');if(x)S={...S,...x,tab:'menu'}}catch(e){}
@@ -232,7 +232,9 @@ S=Object.assign({cr:[],ci:{},dw:[],form:{open:false,n:'',c:'Overig',m:30,d:1,sel
 Object.assign(C,S.ci);S.cr.forEach(r=>R.push(r));S.menu=S.menu.filter(i=>i<R.length);
 const bad=r=>S.dw.some(w=>r.n.toLowerCase().includes(w)||r.i.some(k=>C[k].n.toLowerCase().includes(w)));
 const eur=v=>'€'+v.toFixed(2).replace('.',',');
-const pr=(k,s)=>C[k].p*MU[s]*(1-(DS[s][k]||0));
+let RG={};
+const base=(k,s)=>{const c=C[k],u=c.u,g=r=>r&&r[k]&&r[k][u],own=g(RG[s]),mk=g(RG.ALL);const v=own&&own.n>=2?own.p:mk?mk.p*MU[s]/1.03:0;const t=v*c.q;return t>c.p*.4&&t<c.p*2.5?t:c.p*MU[s]};
+const pr=(k,s)=>base(k,s)*(1-(DS[s][k]||0));
 const bestS=k=>ST.reduce((a,s)=>pr(k,s)<pr(k,a)?s:a);
 const uses=()=>{const m={};S.menu.forEach(i=>R[i].i.forEach(k=>m[k]=(m[k]||0)+1));return m};
 const isBuy=k=>C[k].pa?S.moved.includes(k):!S.moved.includes(k);
@@ -285,5 +287,5 @@ return h+`<div class="card"><input class="in" placeholder="Naam van het gerecht"
 function render(){app.innerHTML=S.tab==='menu'?vMenu():S.tab==='shop'?vShop():vMe();app.innerHTML+=`<p class="meta" style="text-align:center;margin-top:24px">Aanbiedingen via <a href="https://www.prijsprofeet.nl" style="color:inherit">PrijsProfeet</a></p>`;
 nav.innerHTML=[['menu','🍽️','Menu'],['shop','🛒','Boodschappen'],['me','👤','Ik']].map(([t,e,l])=>`<button class="${S.tab===t?'on':''}" onclick="go('${t}')"><span>${e}</span>${l}</button>`).join('')}
 render();
-fetch('deals.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{const d={};ST.forEach(s=>{d[s]={};Object.entries((j.stores||{})[s]||{}).forEach(([k,v])=>d[s][k]=v.d)});DS=d;SRC='Aanbiedingen van '+j.updated+'.';render()}).catch(()=>{});
+fetch('deals.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{const d={};ST.forEach(s=>{d[s]={};Object.entries((j.stores||{})[s]||{}).forEach(([k,v])=>d[s][k]=v.d)});DS=d;RG=j.reg||{};SRC='Aanbiedingen en prijzen van '+j.updated+'.';render()}).catch(()=>{});
 </script></body></html>
