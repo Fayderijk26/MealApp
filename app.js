@@ -34,18 +34,44 @@ function requiredForDays(days){const needed={};for(const date of days){const pla
 function packagePlan(days){const needs=requiredForDays(days);return Object.entries(needs).map(([id,needed])=>{const ing=ingredients()[id],inHouse=amountInStock(id),missing=Math.max(0,needed-inHouse),pack=packFor(id);const packs=pack.size?Math.ceil(missing/pack.size):null;return {id,ing,needed,inHouse,missing,pack,packs,left:pack.size?inHouse+packs*pack.size-needed:null,cost:packs!==null&&pack.price!==null?packs*pack.price:null}})}
 function weeksWithWishes(){return (S.wishes[S.week]||'').toLowerCase().split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean)}
 function specialSuggestions(){const desired=weeksWithWishes();const first=weeks()[0];return allRecipes().filter(allowed).map(r=>({r,score:recommendScore(r,first,new Set(),[],desired)})).sort((a,b)=>b.score-a.score||a.r.name.localeCompare(b.r.name,'nl')).slice(0,7)}
-function recommendScore(r,date,used,categories,wishes=[]){
- const deal=recipeOffers(r,date).slice(0,2).reduce((sum,x)=>sum+7+Math.min(7,x.offer.discount*12),0);
- const wanted=wishes.some(w=>r.name.toLowerCase().includes(w)||r.ingredients.some(id=>(ingredients()[id]?.name||'').toLowerCase().includes(w)))?22:0;
- const liked=S.favs.includes(r.name)?9:0;
- const categoryPenalty=categories.filter(c=>c===r.category).length*12;
- // Beloon het gebruik van nog beschikbare verse restanten, alleen als de hoeveelheid bekend is.
- const fromEarlier=Object.keys(S.plans).filter(d=>d<date && d>=S.week).map(d=>S.plans[d]).filter(x=>x.kind==='recipe').map(x=>recipe(x.recipeId)).filter(Boolean);
- const freshReuse=r.ingredients.filter(id=>PERISHABLE.has(id)&&(amountInStock(id)>0||fromEarlier.some(old=>old.ingredients.includes(id)))).length*8;
- return deal+wanted+liked+freshReuse+(r.minutes<=30?3:0)-categoryPenalty-(used.has(r.id)?1000:0);
+// Gevarieerde maaltijdgroepen, onafhankelijk van de oude brede receptcategorieën.
+function mealGroup(r){
+ const name=r.name.toLowerCase(),ids=new Set(r.ingredients);
+ if(/burger/.test(name))return 'burger';
+ if(/wrap|taco|fajita|quesadilla|pita|gyros|shoarma|enchilada|tostada|taquito|tandoori met naan/.test(name))return 'wraps';
+ if(/orzo|risoni/.test(name)||ids.has('orzo'))return 'orzo';
+ if(/bulgur|couscous/.test(name)||ids.has('bulgur')||ids.has('couscous'))return 'bulgur';
+ if(/gnocchi/.test(name)||ids.has('gnocchi'))return 'gnocchi';
+ if(/rijst|risotto|nasi|pokebowl|curry|chili con carne|roti/.test(name)||ids.has('rijst'))return 'rijst';
+ if(/pasta|spaghetti|lasagne|macaroni|ravioli|carbonara/.test(name)||ids.has('pasta'))return 'pasta';
+ if(/aardappel|stamppot|schotel|loaded fries|kapsalon|friet/.test(name)||ids.has('aardappel')||ids.has('friet'))return 'aardappel';
+ if(/soep/.test(name))return 'soep';
+ if(/salade/.test(name))return 'salade';
+ return 'overig';
+}
+function mealProtein(r){const ids=new Set(r.ingredients);if(ids.has('kip')||ids.has('kipgehakt'))return 'kip';if(ids.has('gehakt')||ids.has('stoofvlees'))return 'rund/gehakt';if(ids.has('zalm'))return 'vis';if(ids.has('spek')||ids.has('ham')||ids.has('carpaccio'))return 'varken';return 'vegetarisch/overig'}
+const norm=s=>s.toLocaleLowerCase('nl-NL').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+function wishMatches(w){
+ const wanted=norm(w);
+ // Een receptnaam geldt als specifieke wens; losse productnamen zijn alleen inspiratie.
+ let exact=allRecipes().filter(allowed).filter(r=>norm(r.name)===wanted);
+ if(exact.length)return exact;
+ if(wanted==='rijst met kip'||wanted==='kip met rijst')return allRecipes().filter(allowed).filter(r=>r.ingredients.includes('kip')&&r.ingredients.includes('rijst'));
+ return allRecipes().filter(allowed).filter(r=>norm(r.name).includes(wanted)&&wanted.length>=6);
+}
+function recommendScore(r,date,used,selected,wishes=[]){
+ const chosen=selected.map(x=>({r:x.r,date:x.date}));
+ const group=mealGroup(r),protein=mealProtein(r),groupCount=chosen.filter(x=>mealGroup(x.r)===group).length,proteinCount=chosen.filter(x=>mealProtein(x.r)===protein).length;
+ const deals=recipeOffers(r,date).slice(0,2).reduce((v,x)=>v+Math.min(7,x.offer.discount*12),0);
+ const liked=S.favs.includes(r.name)?5:0;
+ // Een vers ingrediënt helpt alleen een beetje: het mag nooit een hele kipweek veroorzaken.
+ const reuse=r.ingredients.filter(id=>PERISHABLE.has(id)&&(amountInStock(id)>0||chosen.some(x=>x.date<date&&x.r.ingredients.includes(id)))).length;
+ const nearby=chosen.some(x=>Math.abs((new Date(x.date)-new Date(date))/86400000)<=1&&mealGroup(x.r)===group);
+ const chickenPenalty=protein==='kip'&&proteinCount>=2?110:0;
+ return deals+liked+Math.min(reuse,2)*2+(r.minutes<=30?2:0)-groupCount*38-proteinCount*18-(nearby?25:0)-chickenPenalty-(used.has(r.id)?1000:0);
 }
 function setupPanel(){const empty=weeks().filter(d=>!S.plans[d]).length, wishes=S.wishes[S.week]||'';if(!empty)return `<div class="v3-summary">Deze week is compleet. Je kunt gerechten altijd aanpassen.</div>`;
- return `<section class="v3-setup"><div class="between"><div><div class="kicker">Jouw week, jouw keuze</div><h2>Waar heb je deze week zin in?</h2></div><span class="chip">${empty} lege dagen</span></div><p class="muted">Kies eerst zelf gerechten. Laat daarna alleen de overige dagen slim aanvullen met variatie, aanbiedingen en verse ingrediënten die je over hebt.</p><label for="week-wishes" class="small muted">Ideeën of ingrediënten (gescheiden door komma's)</label><input class="searchbox" id="week-wishes" placeholder="Bijv. pasta, wraps, champignons" value="${safe(wishes)}"><div class="actions v3-actions"><button class="ghost" data-wish-save>Bewaar ideeën</button><button class="ghost" data-suggestions>Bekijk suggesties</button><button class="ghost" data-refresh-offers>Laad aanbiedingen</button><button class="btn" data-generate>Vul overige dagen slim aan</button></div><p class="small muted">${safe(dealExplanation())}</p></section>`}
+ return `<section class="v3-setup"><div class="between"><div><div class="kicker">Jouw week, jouw keuze</div><h2>Waar heb je deze week zin in?</h2></div><span class="chip">${empty} lege dagen</span></div><p class="muted">Noem gerechten die je zeker wilt eten: deze krijgen voorrang en worden eerst ingepland. De rest vullen we aan met variatie, aanbiedingen en beperkt hergebruik van verse ingrediënten.</p><label for="week-wishes" class="small muted">Gerechten die je zeker wilt eten (gescheiden door komma's)</label><input class="searchbox" id="week-wishes" placeholder="Bijv. Pasta carbonara, rijst met kip" value="${safe(wishes)}"><div class="actions v3-actions"><button class="ghost" data-wish-save>Bewaar ideeën</button><button class="ghost" data-suggestions>Bekijk suggesties</button><button class="ghost" data-refresh-offers>Laad aanbiedingen</button><button class="btn" data-generate>Vul overige dagen slim aan</button></div><p class="small muted">${safe(dealExplanation())}</p></section>`}
 function showSuggestions(){const items=specialSuggestions();openModal(`<h2>Ideeën voor deze week</h2><p class="muted">${weeksWithWishes().length?'Suggesties passen waar mogelijk bij je ideeën. ':''}Kies een dag om zelf in te plannen. Beschikbare AH-aanbiedingen staan erbij.</p><div class="choices">${items.map(({r})=>`<div class="v3-suggestion"><strong>${safe(r.name)}</strong><span class="muted small">${r.minutes||'–'} min · ${safe(r.category)}</span>${offerBadges(r,weeks()[0])}<div class="actions"><button class="ghost" data-detail="${r.id}">Recept</button><button class="btn" data-suggest-pick="${r.id}">Plan deze maaltijd</button></div></div>`).join('')}</div>`)}
 function chooseSuggestionDay(id){openModal(`<h2>Welke dag?</h2><div class="choices">${weeks().map(d=>`<button class="choice" data-assign-suggestion="${d}|${id}">${fmt(d,{weekday:'long',day:'numeric',month:'short'})}<span class="muted">${safe(recipe(S.plans[d]?.recipeId)?.name||kindLabel(S.plans[d]?.kind)||'Leeg')}</span></button>`).join('')}</div>`)}
 function stockPanel(){const list=Object.values(ingredients()).filter(i=>i.qty>0);return `<section class="panel"><h2>Voorraad & verpakkingen</h2><p class="muted small">Vul in wat je al in huis hebt en welke verpakking je daadwerkelijk koopt. Lege prijzen worden niet geschat. Verse producten worden extra meegewogen.</p><div class="v3-stockgrid"><select id="stock-product" class="field">${list.map(i=>`<option value="${safe(i.id)}">${safe(i.name)} (${safe(i.unit)})</option>`).join('')}</select><input class="field" id="stock-amount" type="number" min="0" step="0.1" placeholder="Al in huis (hoeveelheid)"><input class="field" id="pack-size" type="number" min="0" step="0.1" placeholder="Verpakkingsinhoud"><input class="field" id="pack-price" type="number" min="0" step="0.01" placeholder="Verpakkingsprijs (€)"><button class="btn" data-save-stock>Opslaan</button></div><div class="small muted" id="stock-preview"></div></section>`}
@@ -87,15 +113,27 @@ const offerBadges=(r,date)=>recipeOffers(r,date).slice(0,3).map(x=>`<span class=
 const dealExplanation=()=>AH_META.updated?`AH-aanbiedingen bijgewerkt: ${safe(AH_META.updated)}. Alleen gecontroleerde productkoppelingen; acties tellen uitsluitend mee binnen de geldigheidsperiode.`:'AH-aanbiedingen nog niet beschikbaar. Het weekmenu wordt zonder aanbiedingen samengesteld.';
 async function loadAhOffers(){try{const response=await fetch('ah-offers.json',{cache:'no-store'});if(!response.ok)throw Error('Geen aanbod');const j=await response.json();if(j.source!=='PrijsProfeet' || !Array.isArray(j.offers))throw Error('Ongeldige aanbiedingen');AH_META={updated:j.updated};AH_OFFERS={};for(const o of j.offers){if(!ING[o.ingredient]||typeof o.discount!=='number'||o.discount<.05||o.discount>.75||!/^\d{4}-\d{2}-\d{2}$/.test(o.valid_from||'')||!/^\d{4}-\d{2}-\d{2}$/.test(o.valid_until||'')||o.valid_from>o.valid_until)continue;(AH_OFFERS[o.ingredient]??=[]).push(o)}render()}catch(e){AH_META={};AH_OFFERS={};console.warn('AH-aanbiedingen niet beschikbaar',e);render()}}
 function generate(){
- const used=new Set(Object.values(S.plans).filter(p=>p.kind==='recipe').map(p=>p.recipeId)),cats=[],wishes=weeksWithWishes();let changed=0;
- // Houd rekening met daadwerkelijk bekende verse voorraad en met reeds ingeplande maaltijden.
- for(const d of weeks()){
-  if(S.plans[d]){const r=recipe(S.plans[d].recipeId);if(r)cats.push(r.category);continue}
-  const ranked=allRecipes().filter(allowed).filter(r=>!used.has(r.id)).map(r=>({r,score:recommendScore(r,d,used,cats,wishes)})).sort((a,b)=>b.score-a.score||a.r.name.localeCompare(b.r.name,'nl'));
-  if(!ranked.length)break;
-  const r=ranked[0].r;S.plans[d]={kind:'recipe',recipeId:r.id,people:S.people};used.add(r.id);cats.push(r.category);changed++;
+ // Eerst de expliciet genoemde recepten plaatsen. Een wens is geen vrijblijvende scorebonus.
+ const days=weeks(),free=days.filter(d=>!S.plans[d]);
+ if(!free.length){alert('Er zijn geen lege dagen om aan te vullen. Verwijder eventueel een maaltijd om opnieuw te plannen.');return}
+ const wishes=weeksWithWishes(),used=new Set(Object.values(S.plans).filter(p=>p.kind==='recipe').map(p=>p.recipeId));
+ const selected=days.filter(d=>S.plans[d]?.kind==='recipe').map(date=>({date,r:recipe(S.plans[date].recipeId)})).filter(x=>x.r);
+ const unmatched=[];
+ for(const wish of wishes){
+  const candidates=wishMatches(wish).filter(r=>!used.has(r.id));
+  if(!candidates.length){unmatched.push(wish);continue}
+  const date=days.find(d=>!S.plans[d]);if(!date)break;
+  candidates.sort((a,b)=>recommendScore(b,date,used,selected)-recommendScore(a,date,used,selected)||a.name.localeCompare(b.name,'nl'));
+  const r=candidates[0];S.plans[date]={kind:'recipe',recipeId:r.id,people:S.people};used.add(r.id);selected.push({date,r});
  }
- save();render();if(!changed)alert('Geen lege dagen om aan te vullen.');
+ for(const date of days){
+  if(S.plans[date])continue;
+  const ranked=allRecipes().filter(allowed).filter(r=>!used.has(r.id)).map(r=>({r,score:recommendScore(r,date,used,selected)})).sort((a,b)=>b.score-a.score||a.r.name.localeCompare(b.r.name,'nl'));
+  if(!ranked.length)break;
+  const r=ranked[0].r;S.plans[date]={kind:'recipe',recipeId:r.id,people:S.people};used.add(r.id);selected.push({date,r});
+ }
+ save();render();
+ if(unmatched.length)alert('Voor deze ideeën vond ik geen passende bestaande recepten: '+unmatched.join(', ')+'. Plan ze handmatig of voeg ze toe als eigen recept.');
 }
 
 function toggle(arr,id){S[arr]=S[arr].includes(id)?S[arr].filter(x=>x!==id):[...S[arr],id];save();render()}
