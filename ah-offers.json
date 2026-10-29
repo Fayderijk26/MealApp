@@ -1,1 +1,25 @@
-{"updated":null,"source":"PrijsProfeet","retailer":"AH","offers":[]}
+{
+  "updated": "2026-10-29",
+  "source": "PrijsProfeet",
+  "retailer": "AH",
+  "offers": [
+    {
+      "ingredient": "bloemkool",
+      "product": "AH Bloemkool",
+      "discount": 0.149,
+      "valid_from": "2026-10-26",
+      "valid_until": "2026-11-01",
+      "price": 1.49,
+      "original_price": 1.75
+    },
+    {
+      "ingredient": "pesto",
+      "product": "AH Groene pesto",
+      "discount": 0.331,
+      "valid_from": "2026-10-26",
+      "valid_until": "2026-11-01",
+      "price": 2.0,
+      "original_price": 2.99
+    }
+  ]
+}
