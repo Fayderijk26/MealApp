@@ -1,24 +1,15 @@
-# MealApp — vernieuwde dag- en weekplanner
+# MealApp v3 – slim weekmenu
 
-Een statische Nederlandstalige maaltijdplanner voor GitHub Pages. Open `index.html` met een lokale HTTP-server, bijvoorbeeld `python3 -m http.server 8000`, of publiceer deze bestanden in de root van je GitHub Pages-repository.
+Upload de bestanden naar de root van je GitHub Pages-repository, met behoud van de map `.github/workflows` en `scripts`. Deze versie gebruikt nog steeds de opslag `mealapp-v2`, zodat je bestaande planning niet wordt gewist. Maak voor de zekerheid eerst via Profiel een back-up.
 
-## Functies
+## Nieuw
+- Een startvraag per week: eigen ideeën opschrijven, aanbiedingen laden, aanbevelingen bekijken en alleen lege dagen laten aanvullen.
+- Een aanbevelingsscore met favorieten, variatie, geldige AH-acties en hergebruik van eerder gebruikte verse ingrediënten. Het is een heuristiek, geen bewezen optimalisatie van kosten of houdbaarheid.
+- Een voorraad- en verpakkingenformulier in Boodschappen. Bij een bekende verpakkingsgrootte en prijs toont de app benodigde aantallen en kassatotaal voor die producten. Onbekende prijzen worden expliciet als onbekend weergegeven. De gebruiker vult deze in; er worden **geen actuele AH-standaardprijzen opgehaald**.
+- Bestaande week-/dagweergaven, recepten en boodschappen blijven beschikbaar.
 
-- Weekplanning met echte datums, dagkaarten en weekkalender, navigatie tussen weken, 'uit eten', restjes, geen maaltijd, verplaatsen en onderling wisselen.
-- Alle 98 originele recepten uit de `index.html` van 29 oktober 2026, met stabiele IDs, categorieën, favorieten, zoeken, filteren, detailweergave, eigen recepten en optionele HTTPS-fotolink.
-- Automatisch invullen van **alleen lege dagen** en overslaan van uitgesloten ingrediënten.
-- Boodschappen per geselecteerde dagen, gegroepeerd per afdeling, samenvoegen, handmatig aanvullen, afvinken en voorraadmarkering.
-- Export/import als JSON; automatische eenmalige migratie van `wm1` naar `mealapp-v2`, zonder `wm1` te wissen.
-- Dark mode, responsive vormgeving, HTML-escaping van gebruikersgegevens.
-
-## Bewuste beperkingen
-
-- **Aanbiedingen zijn uitgeschakeld**. De oorspronkelijke `deals.json` bevat aantoonbaar verkeerde koppelingen (bijv. Ajax allesreiniger als rijst), dus deze nieuwe versie claimt geen actuele kortingen. De indicatieve kosten zijn de oude, grove ingrediëntschattingen. Voor betrouwbare prijsmatching is een apart productvalidatieproces nodig.
-- Er zijn geen verzonnen bereidingsstappen of afbeeldingen toegevoegd. Eigen recepten kunnen die gegevens wel bevatten. De illustraties zijn categorie-emoji's totdat echte foto's beschikbaar zijn.
-- Bij een nieuw, zelf toegevoegd ingrediënt is de standaardhoeveelheid onbekend (0), dus de boodschappenlijst toont **naar smaak**. Later is een editor voor hoeveelheid per persoon nodig.
-- De browseropslag synchroniseert niet tussen apparaten. Maak regelmatig een back-up.
-- Zonder echte browserautomatisering is alleen een syntax- en basale datatest uitgevoerd, geen volledige end-to-endtest op mobiel of desktop.
-
-## Update in GitHub
-
-Maak een backup van de huidige repository of een branch. Upload `index.html`, `styles.css`, `data.js`, `app.js` en `README.md` naar de root. Je kunt je bestaande `scripts/` en `.github/` behouden, maar de prijskoppeling is niet actief in deze versie. Activeer GitHub Pages met `Settings → Pages → Deploy from a branch → main / root`.
+## Belangrijk
+- De knop 'Laad aanbiedingen' leest `ah-offers.json` opnieuw. Voor nieuwe data moet de bestaande GitHub Actions workflow eerst draaien. Gedateerde aanbiedingen worden uitsluitend gebruikt als geldig op de geplande datum.
+- Prijs- en verpakkingsgegevens zijn per apparaat opgeslagen. Ingevulde voorraad wordt niet automatisch afgeboekt na het koken; pas deze zelf aan.
+- Verse combinaties zijn suggesties op basis van gedeelde ingrediënten. De app kent nog geen werkelijke vervaldatums of bewaartemperaturen. Gebruik geen bewaarrichtlijnen afgeleid uit het algoritme.
+- Het voorbeeld-aanbod in `ah-offers.json` kan verlopen zijn. De gegenereerde gerechten kunnen zonder aanbiedingen worden gekozen.
