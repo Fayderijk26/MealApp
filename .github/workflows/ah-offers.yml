@@ -1,0 +1,37 @@
+
+name: AH aanbiedingen ophalen
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  aanbiedingen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository ophalen
+        uses: actions/checkout@v4
+
+      - name: Python installeren
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: AH aanbiedingen ophalen
+        env:
+          PP_API_KEY: ${{ secrets.PP_API_KEY }}
+        run: python scripts/fetch_ah_offers.py
+
+      - name: Aanbiedingen opslaan
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ah-offers.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Update AH aanbiedingen"
+            git push
+          fi
