@@ -1,0 +1,472 @@
+{
+ "updated": "2026-10-29",
+ "source": "PrijsProfeet",
+ "stores": {
+  "AH": {
+   "tomaat": {
+    "d": 0.5,
+    "n": "rodolfi ciliegini cherrytomaten"
+   },
+   "spinazie": {
+    "d": 0.45,
+    "n": "olvarit spinazie kip aardappel 12m+"
+   },
+   "wortel": {
+    "d": 0.5,
+    "n": "knorr wortel wraps met 35% wortel"
+   },
+   "pompoen": {
+    "d": 0.45,
+    "n": "olvarit pompoen kip pasta 12m+"
+   },
+   "kikkererwten": {
+    "d": 0.52,
+    "n": "bonduelle kikkererwten 2 mini's"
+   },
+   "naan": {
+    "d": 0.4,
+    "n": "de kleine keuken knijpmix banaan, pompoen & haver 6m+"
+   },
+   "aardappel": {
+    "d": 0.45,
+    "n": "olvarit spinazie kip aardappel 12m+"
+   },
+   "aardbeien": {
+    "d": 0.4,
+    "n": "de kleine keuken knijpmix aardbei zoete aardappel 6m+"
+   },
+   "paprika": {
+    "d": 0.36,
+    "n": "ah bakaardappeltjes paprika en knoflook"
+   },
+   "knoflook": {
+    "d": 0.5,
+    "n": "knorr airfryer mix voor krokante kip knoflook"
+   },
+   "ham": {
+    "d": 0.5,
+    "n": "knorr cup-a-soup champignon ham"
+   },
+   "pasta": {
+    "d": 0.5,
+    "n": "maggi heat & eat spaghetti bolognese"
+   },
+   "rijst": {
+    "d": 0.5,
+    "n": "ajax blauwe jasmijn allesreiniger"
+   },
+   "broccoli": {
+    "d": 0.5,
+    "n": "knorr good potatoes broccoli en kaas"
+   },
+   "zalm": {
+    "d": 0.5,
+    "n": "ah wrap zalmsalade bieslook roomkaas"
+   },
+   "bloemkool": {
+    "d": 0.45,
+    "n": "olvarit bloemkool kalkoen aardappel 15m+"
+   },
+   "bulgur": {
+    "d": 0.45,
+    "n": "olvarit hutspot met bulgur en kalkoen 12m+"
+   },
+   "linzen": {
+    "d": 0.54,
+    "n": "bonduelle beluga linzen 2 mini's"
+   },
+   "courgette": {
+    "d": 0.36,
+    "n": "olvarit courgetteschotel kalfsvlees quinoa 8m+"
+   },
+   "mais": {
+    "d": 0.58,
+    "n": "bonduelle rode kidneybonen 2 mini's"
+   },
+   "basilicum": {
+    "d": 0.4,
+    "n": "ella's kitchen maize sticks tomaat basilicum 7m+"
+   },
+   "tzatziki": {
+    "d": 0.5,
+    "n": "calvé salsa alla tzatziki"
+   },
+   "sperzieb": {
+    "d": 0.37,
+    "n": "ah sperziebonen kleinverpakking"
+   },
+   "rodekool": {
+    "d": 0.23,
+    "n": "bonduelle rode kool met appel"
+   },
+   "snijbonen": {
+    "d": 0.37,
+    "n": "ah snijbonen kleinverpakking"
+   },
+   "ui": {
+    "d": 0.5,
+    "n": "knorr cup-a-soup franse ui"
+   },
+   "asperges": {
+    "d": 0.5,
+    "n": "knorr cup-a-soup asperge"
+   },
+   "mozzarella": {
+    "d": 0.5,
+    "n": "knorr good pasta tomaat mozzarella"
+   },
+   "spek": {
+    "d": 0.5,
+    "n": "knorr good potatoes spek & ui"
+   },
+   "boerenkool": {
+    "d": 0.26,
+    "n": "ah boerenkool kleinverpakking"
+   },
+   "rucola": {
+    "d": 0.1,
+    "n": "ah jonge bladsla met rucola kleinverpakking"
+   },
+   "sla": {
+    "d": 0.1,
+    "n": "ah jonge bladsla veldsla kleinverpakking"
+   },
+   "ricotta": {
+    "d": 0.5,
+    "n": "ah tortelloni verdi ricotta spinaci"
+   },
+   "pesto": {
+    "d": 0.5,
+    "n": "ah pasta pestosaus"
+   },
+   "wrap": {
+    "d": 0.5,
+    "n": "knorr wortel wraps met 35% wortel"
+   },
+   "gehakt": {
+    "d": 0.5,
+    "n": "ah varkensgehakt"
+   },
+   "kaas": {
+    "d": 0.47,
+    "n": "parrano geraspte kaas snippers robusto"
+   },
+   "gnocchi": {
+    "d": 0.5,
+    "n": "ah verse gnocchi"
+   },
+   "friet": {
+    "d": 0.37,
+    "n": "lay's max holland-style patatje mayo pinda"
+   },
+   "kip": {
+    "d": 0.44,
+    "n": "ah kipfiletrolletjes roomkaas-bieslook"
+   },
+   "kokos": {
+    "d": 0.16,
+    "n": "ah terra verse smoothie kokosmelk appel aardbei"
+   },
+   "pindasaus": {
+    "d": 0.5,
+    "n": "calvé pindasaus mild"
+   },
+   "feta": {
+    "d": 0.33,
+    "n": "ah borrelbrood feta spinazie"
+   },
+   "avocado": {
+    "d": 0.31,
+    "n": "ah roomkaas avocado feta crème"
+   },
+   "nacho": {
+    "d": 0.5,
+    "n": "knorr foodtrips nacho ovenschotel"
+   }
+  },
+  "Jumbo": {
+   "kikkererwten": {
+    "d": 0.5,
+    "n": "hak kikkererwten 225g"
+   },
+   "mais": {
+    "d": 0.5,
+    "n": "hak kidneybonen 225 g"
+   },
+   "linzen": {
+    "d": 0.5,
+    "n": "hak linzen 205 g"
+   },
+   "aardappel": {
+    "d": 0.5,
+    "n": "honig bakplaat mix aardappel, broccoli & vissticks 36g"
+   },
+   "naan": {
+    "d": 0.5,
+    "n": "hak knijpfruit banaan 4 stuks"
+   },
+   "knoflook": {
+    "d": 0.5,
+    "n": "jumbo volkoren naan knoflook koriander 2 stuks"
+   },
+   "spek": {
+    "d": 0.5,
+    "n": "jumbo gerookte spekblokjes 250 g"
+   },
+   "ui": {
+    "d": 0.5,
+    "n": "jumbo gesneden peen en ui hutspot 500 g"
+   },
+   "zuurkool": {
+    "d": 0.5,
+    "n": "jumbo verse zuurkool 500 g"
+   },
+   "boerenkool": {
+    "d": 0.5,
+    "n": "jumbo gesneden boerenkool 300 g"
+   },
+   "sla": {
+    "d": 0.5,
+    "n": "jumbo melange veldsla & bull's blood 75 g"
+   },
+   "rucola": {
+    "d": 0.29,
+    "n": "jumbo melange rucola 75 g"
+   },
+   "bloemkool": {
+    "d": 0.5,
+    "n": "honig bakplaat mix aardappel, bloemkool & kip 36g"
+   },
+   "paprika": {
+    "d": 0.5,
+    "n": "maza hoemoes paprika & oregano"
+   },
+   "courgette": {
+    "d": 0.5,
+    "n": "honig bakplaat mix aardappel, courgette & kip met mexicaanse"
+   },
+   "gehakt": {
+    "d": 0.5,
+    "n": "honig bakplaat mix aardappel, boontjes & gehaktballetjes met"
+   },
+   "broccoli": {
+    "d": 0.5,
+    "n": "honig bakplaat mix aardappel, broccoli & vissticks 36g"
+   },
+   "nacho": {
+    "d": 0.5,
+    "n": "jimmy's popcorn nacho cheese & jalapeño"
+   },
+   "tomaat": {
+    "d": 0.5,
+    "n": "heks'nkaas smeerdip duo origineel - tomaat basilicum 200 g"
+   },
+   "pompoen": {
+    "d": 0.4,
+    "n": "jumbo biologische pompoen"
+   },
+   "basilicum": {
+    "d": 0.5,
+    "n": "heks'nkaas smeerdip duo origineel - tomaat basilicum 200 g"
+   },
+   "aardbeien": {
+    "d": 0.5,
+    "n": "hak knijpfruit aardbei 4 stuks"
+   },
+   "kip": {
+    "d": 0.5,
+    "n": "vivera plantaardige kipstukjes 175 g"
+   },
+   "spinazie": {
+    "d": 0.5,
+    "n": "vivera vegetarische spinazie kaas filet 2 stuks 200 g"
+   },
+   "zalm": {
+    "d": 0.5,
+    "n": "vivera plantaardige zalmfilet 2 stuks 200 g"
+   },
+   "kaas": {
+    "d": 0.5,
+    "n": "old amsterdam original 48+ geraspte kaas 150 g"
+   },
+   "snijbonen": {
+    "d": 0.17,
+    "n": "jumbo gesneden snijbonen 400 g"
+   },
+   "sperzieb": {
+    "d": 0.23,
+    "n": "jumbo gebroken sperziebonen 400 g"
+   },
+   "pesto": {
+    "d": 0.5,
+    "n": "jumbo's vriesverse maaltijd orzo pesto met kip 450 g"
+   },
+   "ham": {
+    "d": 0.31,
+    "n": "johma oet twente ham-prei salade 175 g"
+   },
+   "asperges": {
+    "d": 0.2,
+    "n": "jumbo asperge salade met ham & ei 150 g"
+   },
+   "ei": {
+    "d": 0.33,
+    "n": "jumbo gevulde eieren pittig 4 stuks"
+   },
+   "avocado": {
+    "d": 0.22,
+    "n": "jumbo avocado eetrijp 2 stuks"
+   },
+   "wrap": {
+    "d": 0.35,
+    "n": "jumbo wraphapje gerookte zalm met roomkaas 110 g"
+   },
+   "tzatziki": {
+    "d": 0.16,
+    "n": "jumbo dip tzatziki 150 g"
+   },
+   "carpaccio": {
+    "d": 0.22,
+    "n": "jumbo filet americain carpaccio 150 g"
+   },
+   "rijst": {
+    "d": 0.24,
+    "n": "jumbo borrelzoutjes edamame rijstcookies 170 g"
+   },
+   "pasta": {
+    "d": 0.5,
+    "n": "jumbo pasta pomodoro verspakket 4 personen"
+   },
+   "ricotta": {
+    "d": 0.25,
+    "n": "jumbo airfryer & oven rigatoni ricotta 450 g"
+   }
+  },
+  "Lidl": {
+   "aardappel": {
+    "d": 0.23,
+    "n": "aardappelschijfjes"
+   },
+   "kip": {
+    "d": 0.2,
+    "n": "scharrelkipdijreepjes ahoarma"
+   }
+  },
+  "Aldi": {
+   "wortel": {
+    "d": 0.31,
+    "n": "wortels"
+   },
+   "boerenkool": {
+    "d": 0.5,
+    "n": "boerenkool fijn"
+   },
+   "kaas": {
+    "d": 0.32,
+    "n": "geraspte kaas"
+   },
+   "pompoen": {
+    "d": 0.25,
+    "n": "flespompoen"
+   },
+   "spek": {
+    "d": 0.38,
+    "n": "spekreepjes"
+   },
+   "aardappel": {
+    "d": 0.29,
+    "n": "extra grote kruimige aardappelen"
+   },
+   "gehakt": {
+    "d": 0.17,
+    "n": "gehaktballen met jus"
+   }
+  },
+  "Dirk": {
+   "ham": {
+    "d": 0.24,
+    "n": "1 de beste meesterlijke ham"
+   },
+   "aardbeien": {
+    "d": 0.47,
+    "n": "müllermilk milkshake aardbei"
+   },
+   "spek": {
+    "d": 0.44,
+    "n": "lu tuc bacon"
+   },
+   "paprika": {
+    "d": 0.45,
+    "n": "lu tuc paprika"
+   },
+   "sperzieb": {
+    "d": 0.5,
+    "n": "maggi dagschotel sperziebonen saté"
+   },
+   "broccoli": {
+    "d": 0.57,
+    "n": "maggi dagschotel broccoli kaas"
+   },
+   "bloemkool": {
+    "d": 0.56,
+    "n": "maggi ovenschotel bloemkool-room"
+   },
+   "pasta": {
+    "d": 0.52,
+    "n": "grand'italia mini penne"
+   },
+   "orzo": {
+    "d": 0.59,
+    "n": "grand'italia orzo tradizionali"
+   },
+   "mozzarella": {
+    "d": 0.32,
+    "n": "galbani mozzarella"
+   },
+   "naan": {
+    "d": 0.5,
+    "n": "alpro sojadrink banaan"
+   },
+   "zalm": {
+    "d": 0.43,
+    "n": "westland zalmslaatje"
+   },
+   "pita": {
+    "d": 0.41,
+    "n": "daily chef pita shoarma"
+   },
+   "sla": {
+    "d": 0.13,
+    "n": "1 de beste sla melange"
+   },
+   "gehakt": {
+    "d": 0.4,
+    "n": "go-tan gehakte gember"
+   },
+   "ui": {
+    "d": 0.12,
+    "n": "1 de beste uien"
+   },
+   "witlof": {
+    "d": 0.14,
+    "n": "hollandse witlof"
+   },
+   "wrap": {
+    "d": 0.41,
+    "n": "schär wrap 2 stuks glutenvrij"
+   },
+   "aardappel": {
+    "d": 0.23,
+    "n": "aviko aardappelschotel griekse stijl"
+   },
+   "boerenkool": {
+    "d": 0.1,
+    "n": "prima boerenkoolstamppot"
+   },
+   "knoflook": {
+    "d": 0.1,
+    "n": "pangasiusfilet citroen en knoflook 2 st."
+   }
+  }
+ }
+}
