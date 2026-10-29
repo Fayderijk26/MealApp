@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Haalt de weekaanbiedingen op via de PrijsProfeet API en schrijft deals.json."""
-import json, os, re, sys, time, urllib.parse, urllib.request
+import json, os, re, statistics, sys, time, urllib.parse, urllib.request
 from datetime import date
 
 BASE = "https://www.prijsprofeet.nl/api/v1/search"
@@ -79,38 +79,62 @@ def discount(it):
     return 1 - p / o if p and o and o > p else 0.0
 
 
+UNITS = {"kg": ("g", 1000), "g": ("g", 1), "gr": ("g", 1), "gram": ("g", 1), "l": ("ml", 1000), "liter": ("ml", 1000),
+         "cl": ("ml", 10), "ml": ("ml", 1), "stuks": ("st", 1), "stuk": ("st", 1), "st": ("st", 1)}
+AMT = re.compile(r"(?:(\d+)\s*[x\u00d7]\s*)?(\d+(?:[.,]\d+)?)\s*(kg|gram|gr|g|liter|l|cl|ml|stuks|stuk|st)\b")
+
+
+def amount(it):
+    for f in ("quantity", "name", "unit"):
+        m = AMT.search(str(it.get(f) or "").lower())
+        if m:
+            u, mult = UNITS[m.group(3)]
+            return u, float(m.group(1) or 1) * float(m.group(2).replace(",", ".")) * mult
+    return None
+
+
 def main():
-    out = {"updated": date.today().isoformat(), "source": "PrijsProfeet", "stores": {}}
-    total = 0
+    out = {"updated": date.today().isoformat(), "source": "PrijsProfeet", "stores": {}, "reg": {}}
+    total, pool = 0, {}
     for store, slug in STORES.items():
-        best, seen = {}, 0
-        for page in range(1, 16):
+        best, seen, smp = {}, 0, {}
+        for page in range(1, 61):
             data = get({"q": "*", "retailer": slug, "promotion_status": "active", "page": page, "page_size": 100})
             items = items_of(data)
-            if page == 1 and items:
-                print(store, "voorbeeldveld-namen:", sorted(items[0].keys()))
             seen += len(items)
             for it in items:
                 name = str(it.get("name") or it.get("title") or it.get("product_name") or "").lower()
                 d = min(discount(it), 0.6)
-                if d < 0.10:
-                    continue
+                p, o = num(it.get("price")), num(it.get("original_price"))
+                reg = o if o and p and o >= p else p
+                a = amount(it)
                 for key, rx in KWC.items():
-                    if rx.search(name) and (key in EXEMPT or not JUNK.search(name)):
-                        if d > best.get(key, {}).get("d", 0):
-                            best[key] = {"d": round(d, 2), "n": name[:60]}
+                    if not (rx.search(name) and (key in EXEMPT or not JUNK.search(name))):
+                        continue
+                    if reg and a and a[1] > 0:
+                        smp.setdefault(key, {}).setdefault(a[0], []).append(reg / a[1])
+                    if d >= 0.10 and d > best.get(key, {}).get("d", 0):
+                        best[key] = {"d": round(d, 2), "n": name[:60]}
             if len(items) < 100:
                 break
             time.sleep(0.7)
-        print(f"{store}: {seen} acties, {len(best)} ingredienten in de aanbieding")
+        print(f"{store}: {seen} acties, {len(best)} ingredienten in de aanbieding, {len(smp)} met prijs")
         out["stores"][store] = best
+        out["reg"][store] = {}
+        for key, units in smp.items():
+            for u, v in units.items():
+                pool.setdefault(key, {}).setdefault(u, []).extend(v)
+                if len(v) >= 2:
+                    out["reg"][store].setdefault(key, {})[u] = {"p": round(statistics.median(v), 6), "n": len(v)}
         total += seen
         time.sleep(0.7)
+    out["reg"]["ALL"] = {k: {u: {"p": round(statistics.median(v), 6), "n": len(v)} for u, v in us.items() if len(v) >= 3}
+                         for k, us in pool.items()}
     if total == 0:
         print("Geen data opgehaald, deals.json blijft ongewijzigd.")
         sys.exit(1)
     with open("deals.json", "w", encoding="utf-8") as f:
-        json.dump(out, f, ensure_ascii=False, indent=1)
+        json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
 
 
 if __name__ == "__main__":
