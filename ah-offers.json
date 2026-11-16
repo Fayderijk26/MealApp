@@ -1,34 +1,16 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "source": "PrijsProfeet",
   "retailer": "AH",
   "offers": [
     {
-      "ingredient": "avocado",
-      "product": "AH Avocado",
-      "discount": 0.288,
-      "valid_from": "2026-11-09",
-      "valid_until": "2026-11-15",
-      "price": 0.99,
-      "original_price": 1.39
-    },
-    {
-      "ingredient": "wortel",
-      "product": "AH Winterpeen",
-      "discount": 0.288,
-      "valid_from": "2026-11-09",
-      "valid_until": "2026-11-15",
-      "price": 0.99,
-      "original_price": 1.39
-    },
-    {
-      "ingredient": "gehakt",
-      "product": "AH Gemengd gehakt",
-      "discount": 0.24,
-      "valid_from": "2026-11-09",
-      "valid_until": "2026-11-15",
-      "price": 3.49,
-      "original_price": 4.59
+      "ingredient": "pesto",
+      "product": "AH Groene pesto",
+      "discount": 0.331,
+      "valid_from": "2026-11-16",
+      "valid_until": "2026-11-22",
+      "price": 2.0,
+      "original_price": 2.99
     }
   ]
 }
