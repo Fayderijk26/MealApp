@@ -1,16 +1,16 @@
 {
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "source": "PrijsProfeet",
   "retailer": "AH",
   "offers": [
     {
       "ingredient": "broccoli",
       "product": "AH Broccoli",
-      "discount": 0.233,
+      "discount": 0.267,
       "valid_from": "2026-11-23",
       "valid_until": "2026-11-29",
       "price": 0.99,
-      "original_price": 1.29
+      "original_price": 1.35
     },
     {
       "ingredient": "zalm",
